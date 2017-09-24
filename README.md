@@ -81,7 +81,128 @@ token:=    ENDFILE, string:=          lineno#:= 16, tokenno:= 44
 
 * 语法分析的测试结果
     * 正确的语法 <br>
-  ![image](https://github.com/chenwei1905/TINY/blob/master/picture/syntaxtree.jpg) <br>
-    * 错误的语法 <br>
-  ![image](https://github.com/chenwei1905/TINY/blob/master/picture/error1.jpg) <br>
-  ![image](https://github.com/chenwei1905/TINY/blob/master/picture/error2.jpg) <br>
+	```
+	Read: x
+If
+ Op: 
+ LT
+  Id: x
+  Op: 
+  PLUS
+   const: 7
+   const: 8
+ Assign to: fact
+  const: 1
+ Unknow ExpNode kind
+  Assign to: fact
+   Op: 
+   TIMES
+    Id: fact
+    Id: x
+  Assign to: x
+   Op: 
+   MINUS
+    Id: x
+    const: 1
+  Op: 
+  EQ
+   Id: x
+   const: 0
+ Assign to: wwww
+  const: 3
+ Assign to: xxxx
+  const: 3
+Assign to: x
+ const: 1
+
+	```
+    * 错误的语法 ***缺少if的情况*** <br>
+    ```
+    >>> 
+Syntax error at line 6: match unexpected token -> 
+<
+
+    
+
+>>> 
+Syntax error at line 6: factor unexpected token -> 
+<
+
+
+>>> 
+Syntax error at line 6: match unexpected token -> 
+NUM, val= 7
+
+    
+
+>>> 
+Syntax error at line 6: statment unexpected token -> 
+NUM, val= 7
+
+
+>>> 
+Syntax error at line 6: match unexpected token -> 
++
+
+    
+
+>>> 
+Syntax error at line 6: statment unexpected token -> 
++
+
+
+>>> 
+Syntax error at line 6: match unexpected token -> 
+NUM, val= 8
+
+    
+
+>>> 
+Syntax error at line 6: statment unexpected token -> 
+NUM, val= 8
+
+
+>>> 
+Syntax error at line 6: match unexpected token -> 
+reserved word: then
+
+    
+
+>>> 
+Syntax error at line 6: statment unexpected token -> 
+reserved word: then
+
+
+>>> 
+Syntax error at line 7: match unexpected token -> 
+ID, name= fact
+
+    
+
+>>> 
+Syntax error at line 13: Code ends before file
+
+Read: x
+Assign to: x
+Assign to: fact
+ const: 1
+Unknow ExpNode kind
+ Assign to: fact
+  Op: 
+  TIMES
+   Id: fact
+   Id: x
+ Assign to: x
+  Op: 
+  MINUS
+   Id: x
+   const: 1
+ Op: 
+ EQ
+  Id: x
+  const: 0
+Assign to: wwww
+ const: 3
+
+    ```
+   
