@@ -2,10 +2,41 @@
 一个简单的词法分析和语法分析器
 
 ## 词法介绍
+```python
+ StatTpye = ("START", "INASSIGN", "INCOMMENT", "INNUM", "INID", "DONE")
+    TokenType = (
+        # book-keeping tokens #
+        "ENDFILE", "ERROR",
+        # reserved words #
+        "IF", "THEN", "ELSE", "END", "REPEAT", "UNTIL", "READ", "WRITE",
+        # multicharacter tokens #
+        "ID", "NUM",
+        # special symbols #
+        "ASSIGN", "EQ", "LT", "PLUS", "MINUS", "TIMES", "OVER", "LPAREN", "RPAREN", "SEMI"
+        )
+    reservedWords = {"if":"IF", "then":"THEN", "else":"ELSE", "end":"END", "repeat":"REPEAT", "until":"UNTIL","read":"READ", "write":"WRITE"}
 ```
 
-```
+
 ## 语法介绍
+```
+program -> stmt-sequence
+stmt-sequence->stmt-sequence; statement | statement
+statement -> if-stmt | repeat-stmt | assign-stmt | read-stmt | write-stmt
+if-stmt -> if-exp then stmt-sequence end
+	   | if exp then stmt-sequence else stmt-sequence end
+repeat-stmt -> repeat stmt-sequence until exp
+assign-stmt -> identifier := exp
+read-stmt -> read identifier
+write-stmt -> write exp
+exp -> simple-exp comparison-op simple-exp | simple-exp
+comparison-op -> <|= 
+simple-exp -> simple-exp addop term | term
+oddop -> +|-
+term -> term mulop factor | factor
+mulop -> *|/
+factor -> (exp) | number | identifier
+```
 
 ## 程序的运行和测试
 * 文件 <br>
@@ -115,7 +146,7 @@ If
 Assign to: x
  const: 1
 ```
-    * 错误的语法 ***缺少if的情况*** <br>
+     * 错误的语法 ***缺少if的情况*** <br>
 ```
 >>> 
 Syntax error at line 6: match unexpected token -> 
