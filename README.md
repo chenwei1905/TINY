@@ -81,8 +81,8 @@ token:=    ENDFILE, string:=          lineno#:= 16, tokenno:= 44
 
 * 语法分析的测试结果
     * 正确的语法 <br>
-	```
-	Read: x
+```
+Read: x
 If
  Op: 
  LT
@@ -114,11 +114,10 @@ If
   const: 3
 Assign to: x
  const: 1
-
-	```
+```
     * 错误的语法 ***缺少if的情况*** <br>
-    ```
-    >>> 
+```
+>>> 
 Syntax error at line 6: match unexpected token -> 
 <
 
@@ -203,6 +202,5 @@ Unknow ExpNode kind
   const: 0
 Assign to: wwww
  const: 3
-
-    ```
+```
    
