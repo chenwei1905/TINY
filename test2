@@ -1,0 +1,16 @@
+{ Sample program
+  in TINY language -
+  computes factorial
+}
+read x; { input an integer }
+if x < 7+8 then 
+   fact := 1;
+   repeat 
+	fact := fact * x;
+	x := x - 1 
+   until x = 0;
+   wwww := 3
+else
+   xxxx := 3
+end;
+x := 1 
