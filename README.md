@@ -18,8 +18,7 @@
 
 * 语法分析的测试结果
     * 正确的语法 <br>
-  
-  ![image](https://github.com/chenwei1905/TINY/blob/master/picture/syntaxtree.jpg) <br>
-    * 错误的语法 <br>
+  ![image](https://github.com/chenwei1905/TINY/blob/master/picture/syntaxtree.jpg) <br>
+    * 错误的语法 <br>
   ![image](https://github.com/chenwei1905/TINY/blob/master/picture/error1.jpg) <br>
   ![image](https://github.com/chenwei1905/TINY/blob/master/picture/error2.jpg) <br>
