@@ -12,7 +12,6 @@ def test():
         else:
             break
 
-
 token = ""
 
 class treeNode():
