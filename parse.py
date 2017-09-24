@@ -1,4 +1,4 @@
-#!/bin/python
+#!/usr/bin/env python
 import scan
 import sys
 filein = open(sys.argv[1]).readlines()
