@@ -1,4 +1,4 @@
-#!/bin/python
+#!/usr/bin/env python
 import scan
 import sys
 filein = open(sys.argv[1]).readlines()
@@ -11,7 +11,6 @@ def test():
             printToken()
         else:
             break
-
 
 token = ""
 
@@ -216,6 +215,7 @@ def parse():
     if token != "ENDFILE":
         syntaxError("Code ends before file\n")
     return t
+
 i = 0
 def printTree(tree):
     global i
@@ -252,6 +252,7 @@ def printTree(tree):
         printTree(tree.child2)
         tree = tree.sibling
     i -= 1    
+
 def printToken():
     global token
     if token in ("IF", "THEN", "ELSE", "END", "REPEAT", "UNTIL", "READ", "WRITE"):
@@ -286,9 +287,6 @@ def printToken():
         print("ERROR: %s\n"%a.tokenString)
     else:
         print("Unknow token: %s\n"%token)
-    
-        
-        
     
 def test2():
     global token

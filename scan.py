@@ -1,4 +1,4 @@
-#!/bin/python
+#!/usr/bin/env python
 
 class Scan(object):
     StatTpye = ("START", "INASSIGN", "INCOMMENT", "INNUM", "INID", "DONE")
