@@ -16,30 +16,24 @@ def test():
 token = ""
 
 class treeNode():
-    def __init__(self, data=None, child1=None, child2=None, child3=None, sibling=None):
-        self.data = data
-        self.child1 = child1
-        self.child2 = child2
-        self.child3 = child3
-        self.sibling = sibling
-
-class newStmtNode:
-    def __init__(self, kind):
+    def __init__(self):
+        self.data = None
         self.child0 = None
         self.child1 = None
         self.child2 = None
         self.sibling = None
+
+class newStmtNode(treeNode):
+    def __init__(self, kind):
+        treeNode.__init__(self)
         self.nodekind = "StmtK"
         self.stmtkind = kind
         self.lineno = None
         self.attrname = None
 
-class newExpNode:
+class newExpNode(treeNode):
     def __init__(self, kind):
-        self.child0 = None
-        self.child1 = None
-        self.child2 = None
-        self.sibling = None
+        treeNode.__init__(self)
         self.nodekind = "ExpK"
         self.expkind = kind
         self.lineno = None

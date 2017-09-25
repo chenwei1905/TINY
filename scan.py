@@ -26,29 +26,29 @@ class Scan(object):
         self.source = source
 
     def getNextChar(self):
-        if Scan.lineno != len(self.source) and Scan.linepos == len(Scan.lineBuf):
-            Scan.lineno += 1
-            Scan.lineBuf = self.source[Scan.lineno-1]
-            Scan.linepos = 0
-        if Scan.linepos != len(Scan.lineBuf):
-            Scan.linepos += 1
-            return Scan.lineBuf[Scan.linepos-1]
-        if Scan.lineno == len(self.source) and Scan.linepos == len(Scan.lineBuf):
+        if __class__.lineno != len(self.source) and __class__.linepos == len(__class__.lineBuf):
+            __class__.lineno += 1
+            __class__.lineBuf = self.source[__class__.lineno-1]
+            __class__.linepos = 0
+        if __class__.linepos != len(__class__.lineBuf):
+            __class__.linepos += 1
+            return __class__.lineBuf[__class__.linepos-1]
+        if __class__.lineno == len(self.source) and __class__.linepos == len(__class__.lineBuf):
             return -1
     def reservedLookup(self,s):
-        if s in Scan.reservedWords.keys():
-            return Scan.reservedWords[s]
+        if s in __class__.reservedWords.keys():
+            return __class__.reservedWords[s]
         return  "ID"
 
     def ungetNextChar(self):
-        Scan.linepos -= 1
-        return Scan.lineBuf[Scan.linepos-1]
+        __class__.linepos -= 1
+        return __class__.lineBuf[__class__.linepos-1]
     
     def getToken(self):
         String = ""
         state = "START"
         while state != "DONE" :
-            c = Scan.getNextChar(self)
+            c = __class__.getNextChar(self)
             save = "TRUE"
             if state == "START":
                 if str(c).isdigit():
@@ -66,38 +66,38 @@ class Scan(object):
                     state = "DONE"
                     if c == -1:
                         save = "FALSE"
-                        Scan.currentToken = "ENDFILE"
-                        Scan.tokenno += 1
+                        __class__.currentToken = "ENDFILE"
+                        __class__.tokenno += 1
                     elif c == "=":
-                        Scan.currentToken = "EQ"
-                        Scan.tokenno += 1
+                        __class__.currentToken = "EQ"
+                        __class__.tokenno += 1
                     elif c == "<":
-                        Scan.currentToken = "LT"
-                        Scan.tokenno += 1
+                        __class__.currentToken = "LT"
+                        __class__.tokenno += 1
                     elif c == "+":
-                        Scan.currentToken = "PLUS"
-                        Scan.tokenno += 1
+                        __class__.currentToken = "PLUS"
+                        __class__.tokenno += 1
                     elif c == "-":
-                        Scan.currentToken = "MINUS"
-                        Scan.tokenno += 1
+                        __class__.currentToken = "MINUS"
+                        __class__.tokenno += 1
                     elif c == "*":
-                        Scan.currentToken = "TIMES"
-                        Scan.tokenno += 1
+                        __class__.currentToken = "TIMES"
+                        __class__.tokenno += 1
                     elif c == "/":
-                        Scan.currentToken = "OVER"
-                        Scan.tokenno += 1
+                        __class__.currentToken = "OVER"
+                        __class__.tokenno += 1
                     elif c == "(":
-                        Scan.currentToken = "LPAREN"
-                        Scan.tokenno += 1
+                        __class__.currentToken = "LPAREN"
+                        __class__.tokenno += 1
                     elif c == ")":
-                        Scan.currentToken = "PPAREN"
-                        Scan.tokenno += 1
+                        __class__.currentToken = "PPAREN"
+                        __class__.tokenno += 1
                     elif c == ";":
-                        Scan.currentToken = "SEMI"
-                        Scan.tokenno += 1
+                        __class__.currentToken = "SEMI"
+                        __class__.tokenno += 1
                     else:
-                        Scan.currentToken = "ERROR"
-                        Scan.tokenno += 1
+                        __class__.currentToken = "ERROR"
+                        __class__.tokenno += 1
             elif state == "INCOMMENT":
                 save = "FALSE"
                 if c == "}":
@@ -105,47 +105,47 @@ class Scan(object):
             elif state == "INASSIGN":
                 state = "DONE"
                 if c == "=":
-                   Scan.currentToken = "ASSIGN"
-                   Scan.tokenno += 1
+                   __class__.currentToken = "ASSIGN"
+                   __class__.tokenno += 1
                 else:
-                    Scan.ungetNextChar(self)
+                    __class__.ungetNextChar(self)
                     save = "FALSE"
-                    Scan.currentToken = "ERROR"
-                    Scan.tokenno += 1
+                    __class__.currentToken = "ERROR"
+                    __class__.tokenno += 1
             elif state == "INNUM":
                 if not str(c).isdigit():
-                    Scan.ungetNextChar(self)
+                    __class__.ungetNextChar(self)
                     save = "FALSE"
                     state = "DONE"
-                    Scan.currentToken = "NUM"
-                    Scan.tokenno += 1
+                    __class__.currentToken = "NUM"
+                    __class__.tokenno += 1
             elif state == "INID":
                 if not str(c).isalpha():
-                    Scan.ungetNextChar(self)
+                    __class__.ungetNextChar(self)
                     save = "FALSE"
                     state = "DONE"
-                    Scan.currentToken = "ID"
-                    Scan.tokenno += 1
+                    __class__.currentToken = "ID"
+                    __class__.tokenno += 1
             elif state == "DONE":
                 pass
             else:
                 print("Scanner Bug: state = %s\n"%state)
                 state = "DONE"
-                Scan.currentToken = "ERROR"
-                Scan.tokenno += 1
+                __class__.currentToken = "ERROR"
+                __class__.tokenno += 1
 #            print("state:= %s"%state)
 #            print("save:= %s"%save)
 #            print("char:= %s"%c)
             if state == "DONE":
-                Scan.tokenString = String
+                __class__.tokenString = String
                 String =  ""
-                if Scan.currentToken == "ID":
-                    Scan.currentToken = Scan.reservedLookup(self,Scan.tokenString)
+                if __class__.currentToken == "ID":
+                    __class__.currentToken = __class__.reservedLookup(self,__class__.tokenString)
 
             if save == "TRUE":
                 String = String + c
 
-        return Scan.currentToken        
+        return __class__.currentToken        
                     
 
 if __name__ == "__main__":                    
